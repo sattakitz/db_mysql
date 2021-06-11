@@ -3,8 +3,12 @@
 
     class user extends connectDB {
         function getUser() {
-            $query = $this->pdo->query('SELECT * FROM user');
-            return $query;
+            $sql = "SELECT * FROM user";
+            return $this->conn->query($sql);
+        }
+        function getLoginUser($user, $password) {
+            $sql = "SELECT * FROM user where username='$user' and password='$password'";
+            return $this->conn->query($sql);
         }
     }
 ?>
