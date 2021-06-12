@@ -1,19 +1,22 @@
 <?php
-require_once '../configs/db.class.php';
+require_once './user.class.php';
+
+$userFn = new user();
 
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 if (isset($postdata) && !empty($postdata)) {
-    $pwd = trim($request->password);
-    $username = trim($request->username);
-    $sql = "SELECT * FROM users where username='$username' and password='$pwd'";
-    if ($result->num_rows >= 1) {
-        $member = $result->fetch_assoc();
-        $_SESSION['Member'] = $member;
-        $_SESSION['newLogin'] = 'Welcome.';
-        echo "<script> window.location.href = './'; </script>";
+    // $pwd = mysqli_real_escape_string($mysqli, trim($request->password));
+    // $name = mysqli_real_escape_string($mysqli, trim($request->username));
+    $name = $request->username;
+    $pwd = $request->password;
+    echo "username: " . $name . ", password: " . $pwd;
+
+    $result = $userFn->getLoginUser($name, $pwd);
+    echo json_encode($result);
+    if ($result->num_rows > 1) {
+        echo json_encode($rows);
     } else {
-        echo "<script> window.alert('Username or Password incorrected!'); </script>";
+        http_response_code(404);
     }
 }
-?>
