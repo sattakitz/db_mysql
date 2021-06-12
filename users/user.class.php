@@ -3,7 +3,7 @@
 
     class user extends connectDB {
         function getUser() {
-            $query = $this->pdo->query('SELECT * FROM user');
+            $query = $this->pdo->query('SELECT * FROM users');
             return $query;
         }
     }
