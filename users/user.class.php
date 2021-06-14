@@ -3,11 +3,11 @@
 
     class user extends connectDB {
         function getUser() {
-            $sql = "SELECT * FROM user";
+            $sql = "SELECT * FROM users";
             return $this->conn->query($sql);
         }
         function getLoginUser($user, $password) {
-            $sql = "SELECT * FROM user where username='$user' and password='$password'";
+            $sql = "SELECT * FROM users where username='$user' and password='$password'";
             return $this->conn->query($sql);
         }
     }

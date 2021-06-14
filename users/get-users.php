@@ -6,7 +6,7 @@ $userFn = new user();
 
 $users = $userFn->getUser();
 
-echo json_encode($users->fetchAll());
+echo json_encode($users->fetch_all());
 
 // while ($user = $users->fetch()) {
 //     // print_r($user);
